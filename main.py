@@ -5,6 +5,7 @@ print(ard)
 while True:
     if ard.readline != None:
         os.startfile("D:/DOCUMENTS/Python_Scripts/Home/build/exe.win-amd64-3.8/voice_commands.exe")
-        break
+        os.startfile("C:\\Programmes\\Microsoft VS Code\\Code.exe")
+        break 
     else:
         print(str(ard.readline().decode('UTF-8')))
