@@ -7,10 +7,11 @@ bool flag = false;
 void setup() {
   pinMode(pirPin, INPUT);
   Serial.begin(9600);
+  Serial.setTimeout(1);
 }
 
 void loop() {
-  pirValue = digitalRead(pirPin);
+  /*pirValue = digitalRead(pirPin);
   if (!pirValue) {
     flag = false;
   }
@@ -20,6 +21,8 @@ void loop() {
       flag = true;
     }
     
-  }
-
+  }*/
+  Serial.println("1");
+  delay(1000);
+  Serial.flush();
 }
