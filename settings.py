@@ -4,30 +4,30 @@ import sys
 import json
 
 
-def save(topics, api_key, ville):
-    global status
-    if topics != []:
-        topics_to_save= {"topics":[]}
-        topics_name = ["Actualités générales","Informations nationales", "Sport",
-                    "Divertissement", "Économie", "Planète", "Faits insolites",
-                    "Desintox", "Tech"]
-        correspondances = ["actu-generale","locales","sport","art-stars","economie","planete"
-            ,"insolite","desintox","high-tech"]
-        for i, topic in enumerate(topics_name):
-            if topic in topics:
-                topics_to_save["topics"].append(correspondances[i])
+def save(topics, api_key, ville, nb_articles):
+    if os.path.isdir("./conf"):
+        if topics != []:
+            topics_to_save= {"topics":[],"nb_articles":nb_articles}
+            topics_name = ["Actualités générales","Informations nationales", "Sport",
+                        "Divertissement", "Économie", "Planète", "Faits insolites",
+                        "Desintox", "Tech"]
+            correspondances = ["actu-generale","locales","sport","art-stars","economie","planete"
+                ,"insolite","desintox","high-tech"]
+            for i, topic in enumerate(topics_name):
+                if topic in topics:
+                    topics_to_save["topics"].append(correspondances[i])
 
-        with open("conf/topics.json","w") as f:
-            json.dump(topics_to_save, f)
+            with open("conf/topics.json","w") as f:
+                json.dump(topics_to_save, f)
+        else:
+            return
+        with open("conf/ville.txt","w") as f:
+            f.write(ville)
+        with open("conf/api_key.txt","w") as f:
+            f.write(api_key)
     else:
-        status = -1
-        return
-    with open("conf/ville.txt","w") as f:
-        f.write(ville)
-    with open("conf/api_key.txt","w") as f:
-        f.write(api_key)
-    status = 0
-
+        os.mkdir("conf")
+        
 st.title("Bienvenue sur la page de configuration")
 st.markdown("Pour être sûr que le programme fonctionne, vous devrez configurer quelques paramètres. \
             Vous pouvez toujours accéder à cette page pour changer des paramètres en exécutant **settings.py** .")
@@ -57,15 +57,11 @@ with st.expander("Regardez comment récupérer votre clé API"):
 st.markdown("#### Votre ville")
 ville = st.text_input("Cela nous permettra de communiquer les données au plus proche de chez vous")
 
-success = st.button("Valider mes choix", on_click=save, args = (topics, api_key, ville))
+success = st.button("Valider mes choix", on_click=save, args = (topics, api_key, ville, nb_articles))
 
 
 if success :
-    if status==0:
-        st.success("Paramètres enregistrés !")
-    elif status == -1:
-        st.error("Renseignez au moins un sujet qui vous intéresse")
-    st.write(status)
+    st.success("Paramètres enregistrés !")
 
 if __name__ == "__main__":
     if not st._is_running_with_streamlit:
