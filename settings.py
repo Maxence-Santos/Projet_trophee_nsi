@@ -5,28 +5,28 @@ import json
 
 
 def save(topics, api_key, ville, nb_articles):
-    if os.path.isdir("./conf"):
-        if topics != []:
-            topics_to_save= {"topics":[],"nb_articles":nb_articles}
-            topics_name = ["Actualités générales","Informations nationales", "Sport",
-                        "Divertissement", "Économie", "Planète", "Faits insolites",
-                        "Desintox", "Tech"]
-            correspondances = ["actu-generale","locales","sport","art-stars","economie","planete"
-                ,"insolite","desintox","high-tech"]
-            for i, topic in enumerate(topics_name):
-                if topic in topics:
-                    topics_to_save["topics"].append(correspondances[i])
-
-            with open("conf/topics.json","w") as f:
-                json.dump(topics_to_save, f)
-        else:
-            return
-        with open("conf/ville.txt","w") as f:
-            f.write(ville)
-        with open("conf/api_key.txt","w") as f:
-            f.write(api_key)
-    else:
+    if not os.path.isdir("./conf"):
         os.mkdir("conf")
+    if topics != []:
+        topics_to_save= {"topics":[],"nb_articles":nb_articles}
+        topics_name = ["Actualités générales","Informations nationales", "Sport",
+                    "Divertissement", "Économie", "Planète", "Faits insolites",
+                    "Desintox", "Tech"]
+        correspondances = ["actu-generale","locales","sport","art-stars","economie","planete"
+            ,"insolite","desintox","high-tech"]
+        for i, topic in enumerate(topics_name):
+            if topic in topics:
+                topics_to_save["topics"].append(correspondances[i])
+
+        with open("conf/topics.json","w") as f:
+            json.dump(topics_to_save, f)
+    else:
+        return
+    with open("conf/ville.txt","w") as f:
+        f.write(ville)
+    with open("conf/api_key.txt","w") as f:
+        f.write(api_key)
+        
         
 st.title("Bienvenue sur la page de configuration")
 st.markdown("Pour être sûr que le programme fonctionne, vous devrez configurer quelques paramètres. \
