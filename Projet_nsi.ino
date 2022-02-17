@@ -9,6 +9,7 @@ void setup() {
   Serial.begin(9600);
   Serial.setTimeout(1);
   flag = false;
+  delay(5000);
 }
 
 void loop() {

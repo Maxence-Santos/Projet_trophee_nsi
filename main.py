@@ -2,6 +2,7 @@ import serial
 import os
 import pyttsx3
 import data_retriever
+import time
 
 engine = pyttsx3.init('sapi5')
 voices = engine.getProperty('voices')
@@ -13,12 +14,12 @@ def speak(audio):
 
 ard = serial.Serial('COM3',timeout=1)
 print(ard)
+
 while True:
-    if ard.readline != None:
+    #print(type(str(ard.readline().decode('UTF-8'))))
+    if str(ard.readline().decode('UTF-8')) != "" : 
+        os.startfile("C:\\Program Files\\Microsoft VS Code\\Code.exe")
         speak(data_retriever.weather())
         speak(data_retriever.actus())
-        os.startfile("build\\exe.win-amd64-3.8\\voice_commands.exe")
-        os.startfile("C:\\Programmes\\Microsoft VS Code\\Code.exe")
-        break 
-    else:
-        print(str(ard.readline().decode('UTF-8')))
+        time.sleep(2)
+        os.startfile("build\\exe.win-amd64-3.8\\voice_commands.exe") 
