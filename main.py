@@ -3,6 +3,9 @@ import os
 import pyttsx3
 import data_retriever
 import time
+import psutil
+import subprocess
+import wmi
 
 engine = pyttsx3.init('sapi5')
 voices = engine.getProperty('voices')
@@ -12,11 +15,19 @@ def speak(audio):
     engine.say(audio)
     engine.runAndWait()
 
+def trouverInstance():
+    name = 'voice_commands.exe'
+    f = wmi.WMI() 
+    for process in f.Win32_Process(): 
+        if process.name == name: 
+            process.Terminate()
+
 ard = serial.Serial('COM3',timeout=1)
 print(ard)
 
 while True:
     #print(type(str(ard.readline().decode('UTF-8'))))
+    trouverInstance()
     if str(ard.readline().decode('UTF-8')) != "" : 
         os.startfile("C:\\Program Files\\Microsoft VS Code\\Code.exe")
         speak(data_retriever.weather())
