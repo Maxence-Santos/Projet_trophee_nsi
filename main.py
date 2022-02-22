@@ -34,8 +34,8 @@ def trouverInstance() -> None:
 if __name__ == "__main__":
     while True:
         if ard.readline() == b'D\xc3\xa9tect\xc3\xa9\r\n':
-            trouverInstance()        
-            voice_commands.wishMe()
+            trouverInstance()
+            voice_commands.wishMe()       
             voice_commands.voice_cmd()     
 
 # TODO #5 : Commente ton code pour qu'il soit compréhensible
