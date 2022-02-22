@@ -6,8 +6,7 @@ from bs4 import BeautifulSoup as bs
 import requests
 
 
-
-def weather()-> str:
+def weather() -> str:
     '''
     Fait un rapport météo succinct de la journée et du lendemain
     Paramètres:
@@ -21,7 +20,7 @@ def weather()-> str:
         ville = file["ville"]
         api_key = file["api_key"]
     url = f"http://api.weatherapi.com/v1/forecast.json?key={api_key}&q={ville}&days=2&aqi=no&alerts=no"
-    reponse = urlopen(url) # Ouvre la page du rapport météo
+    reponse = urlopen(url)  # Ouvre la page du rapport météo
     data = json.loads(reponse.read())["forecast"]["forecastday"]
     # Crée un dictionnaire des informations qui seront utiles au rapport ( températures, vent, description )
     today_weather = {"temp_min": int(data[0]["day"]["mintemp_c"]),
@@ -51,7 +50,7 @@ Le vent soufflera jusqu'à {tomorrow_weather['vent']} km/h. La tendance de la jo
     return rapport
 
 
-def actus()-> str:
+def actus() -> str:
     '''
         Fait un rapport des actualités succinct
         Paramètres:
@@ -91,7 +90,7 @@ def actus()-> str:
     return rapport
 
 
-if __name__ == "__main__": # Sert seulement pour tester les fonctions
+if __name__ == "__main__":  # Sert seulement pour tester les fonctions
     print(weather())
     print(actus())
 

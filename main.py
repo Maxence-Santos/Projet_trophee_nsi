@@ -14,9 +14,10 @@ voices = engine.getProperty('voices')
 engine.setProperty('voice', voices[0].id)
 ard = serial.Serial('COM3', timeout=1)
 
+
 ##### PROCEDURES PRATIQUES ######
 
-def speak(audio:str)-> None:
+def speak(audio: str) -> None:
     '''
     Prend une chaîne de caractères en paramètre et la dit à haute voix
     Paramètres:
@@ -28,7 +29,7 @@ def speak(audio:str)-> None:
     engine.runAndWait()
 
 
-def trouverInstance()-> None:
+def trouverInstance() -> None:
     '''
     -
     '''
@@ -38,6 +39,7 @@ def trouverInstance()-> None:
         pr.append(process.name)
     if "Code.exe" not in pr:
         os.startfile("C:\\Program Files\\Microsoft VS Code\\Code.exe")
+
 
 ##### PROGRAMME PRINCIPAL ######
 

@@ -5,7 +5,7 @@ import sys
 import json
 
 
-def save(topics:list, api_key:str, ville:str, nb_articles:int)-> None:
+def save(topics: list, api_key: str, ville: str, nb_articles: int) -> None:
     '''
     Enregistre dans un fichier les paramètres choisis par l'utilisateur
     :param topics:list - Liste des sujets
@@ -16,7 +16,7 @@ def save(topics:list, api_key:str, ville:str, nb_articles:int)-> None:
     '''
     # S'assure que les paramètres sont corrects
     if api_key != "" and topics != [] and ville != "":
-        topics_to_save = {"topics": [], "nb_articles": nb_articles,"api_key":api_key,"ville":ville}
+        topics_to_save = {"topics": [], "nb_articles": nb_articles, "api_key": api_key, "ville": ville}
         topics_name = ["Actualités générales", "Informations nationales", "Sport",
                        "Divertissement", "Économie", "Planète", "Faits insolites",
                        "Desintox", "Tech"]
@@ -29,6 +29,7 @@ def save(topics:list, api_key:str, ville:str, nb_articles:int)-> None:
         # Sauvegarde les paramètre
         with open("config.json", "w") as f:
             json.dump(topics_to_save, f)
+
 
 ##### HEADER #####
 st.title("Bienvenue sur la page de configuration")
