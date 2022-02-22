@@ -15,10 +15,11 @@ def weather()-> str:
     Retour :
         - str : Le rapport météo
     '''
-    with open("conf/ville.txt", "r") as f:
-        ville = f.read() # Note la ville où le rapport météo devra être fait
-    with open("conf/api_key.txt", "r") as f:
-        api_key = f.read() # Note la clé API de l'utilisateur
+    # Note la ville où le rapport météo devra être fait ainsi que la clé API
+    with open("config.json", "r") as f:
+        file = json.loads(f.read())
+        ville = file["ville"]
+        api_key = file["api_key"]
     url = f"http://api.weatherapi.com/v1/forecast.json?key={api_key}&q={ville}&days=2&aqi=no&alerts=no"
     reponse = urlopen(url) # Ouvre la page du rapport météo
     data = json.loads(reponse.read())["forecast"]["forecastday"]
@@ -59,7 +60,7 @@ def actus()-> str:
             - str : Le rapport des actualités
         '''
     # Ouvre le fichier de configuration pour noter les sujets d'intérêts de l'utilisateur et la qté d'aticles à donner
-    with open("conf/topics.json", "r") as f:
+    with open("config.json", "r") as f:
         file = json.loads(f.read())
         topics = file["topics"]
         nb_articles = file["nb_articles"]

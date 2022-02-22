@@ -28,7 +28,7 @@ def speak(audio:str)-> None:
     engine.runAndWait()
 
 
-def trouverInstance(None)-> None:
+def trouverInstance()-> None:
     '''
     -
     '''
