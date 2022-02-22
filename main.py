@@ -35,11 +35,11 @@ def trouverInstance() -> None:
     On l'ouvre s'il n'est pas déjà ouvert
     '''
     f = wmi.WMI()
-    pr = []
-    for process in f.Win32_Process():
-        pr.append(process.name)
+    pr = [process.name for process in f.Win32_Process()]
     if "Code.exe" not in pr:
         os.startfile("C:\\Program Files\\Microsoft VS Code\\Code.exe")
+    if "voice_commands.exe" not in pr:
+        os.startfile("build\\exe.win-amd64-3.8\\voice_commands.exe")
 
 
 ##### PROGRAMME PRINCIPAL ######
@@ -51,14 +51,8 @@ if __name__ == "__main__":
             speak(data_retriever.weather())
             speak(data_retriever.actus())
             time.sleep(2)
-            os.startfile("build\\exe.win-amd64-3.8\\voice_commands.exe")
-        elif ard.readline() == b'Low\r\n':
-            name1 = 'voice_commands.exe'
-            f = wmi.WMI()
-            pr = []
-            for process in f.Win32_Process():
-                if process.name == name1:
-                    process.Terminate()
+            os.startfile("build\\exe.win-amd64-3.8\\voice_commands.exe")            
 
 # TODO : Commente ton code pour qu'il soit compréhensible
 # TODO : Termine les docstrings
+# TODO : Météo dans voice_commands
