@@ -40,7 +40,7 @@ def takeCommand():
         speak("Je vous écoute")
         r.pause_threshold = 1
         audio = r.listen(source)
-    try:
+    try: 
         print("Reconnaissance...")
         speak("reconnaissance en cours")
         query = r.recognize_google(audio, language='fr-ln')
