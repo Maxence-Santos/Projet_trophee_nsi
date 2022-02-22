@@ -6,12 +6,20 @@ import webbrowser
 import os
 import pywhatkit
 import keyboard
+import data_retriever
 
 engine = pyttsx3.init('sapi5')
 voices = engine.getProperty('voices')
 engine.setProperty('voice', voices[0].id)
 
-def speak(audio):
+def speak(audio: str) -> None:
+    '''
+    Prend une chaîne de caractères en paramètre et la dit à haute voix
+    Paramètres:
+        - audio : Le chaîne à dire
+    Retour :
+        None
+    '''
     engine.say(audio)
     engine.runAndWait()
 
@@ -28,10 +36,10 @@ def wishMe():
 def takeCommand():
     r = sr.Recognizer()
     with sr.Microphone() as source:
-        audio = r.listen(source)
         print("Écoute en cours... ")
         speak("Je vous écoute")
         r.pause_threshold = 1
+        audio = r.listen(source)
     try:
         print("Reconnaissance...")
         speak("reconnaissance en cours")
@@ -64,11 +72,11 @@ def voice_cmd():
                     song = query.replace('youtube','')
                     pywhatkit.playonyt(song)
 
-                elif "google" in query:
-                    os.startfile("C:\\Program Files\\Mozilla Firefox\\firefox.exe")
+                elif any(word in query for word in ["météo","temps"]):
+                    speak(data_retriever.weather())
 
-                elif "météo" in query:
-                    webbrowser.open_new_tab("https://meteofrance.com")
+                elif any(word in query for word in ["actu","actus","news","actualités","informations"]):
+                    speak(data_retriever.actus())
 
                 elif "pronote" in query:
                     webbrowser.open_new_tab("https://0332870r.index-education.net/pronote/eleve.html")
@@ -99,6 +107,7 @@ def voice_cmd():
 
                 elif any(word in query for word in ["éteins","éteint","éteindre"]):
                     running = False
+                    speak("Au revoir")
                     
                 
 
