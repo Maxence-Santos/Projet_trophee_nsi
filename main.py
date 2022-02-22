@@ -31,7 +31,8 @@ def speak(audio: str) -> None:
 
 def trouverInstance() -> None:
     '''
-    -
+    Ajoute tous les processus ouverts dans une liste afin de chercher si code.exe est ouvert ou non.
+    On l'ouvre s'il n'est pas déjà ouvert
     '''
     f = wmi.WMI()
     pr = []
