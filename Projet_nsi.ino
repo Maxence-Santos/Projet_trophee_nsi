@@ -16,7 +16,6 @@ void loop() {
   pirValue = digitalRead(pirPin);
   if (!pirValue) {
     flag = false;
-    Serial.println("Low");
   }
   if (pirValue) {
     if (!flag) {
