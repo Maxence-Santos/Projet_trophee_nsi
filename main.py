@@ -33,8 +33,10 @@ def trouverInstance() -> None:
 
 if __name__ == "__main__":
     while True:
+        #Lecture des données envoyées sur le port série et comparaison avec une chaîne de caractère en binaire
         if ard.readline() == b'D\xc3\xa9tect\xc3\xa9\r\n':
             trouverInstance()
+            #Appel de fonctions contenues dans voice_commands.py
             voice_commands.wishMe()       
             voice_commands.voice_cmd()     
 

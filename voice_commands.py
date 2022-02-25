@@ -1,3 +1,4 @@
+##### IMPORT DES LIBRAIRIES #####
 import pyttsx3
 import speech_recognition as sr
 import datetime
@@ -24,6 +25,12 @@ def speak(audio: str) -> None:
     engine.runAndWait()
 
 def wishMe():
+    '''
+    Dit "Bonjour" ou "Bonsoir" en fonction de l'heure qu'il est et
+    demande à l'utilisateur en quoi il peut l'aider.
+    Retour :
+        -None
+    '''
     hour = int(datetime.datetime.now().hour)
     if hour >= 0 and hour < 18:
         speak('Bonjour')
@@ -34,6 +41,11 @@ def wishMe():
     speak('Comment puis-je vous aider')
 
 def takeCommand():
+    '''
+    Permet au programme de prendre une entrée audio et de reconnaître ce qui a été dit.
+    Retour :
+        - Chaîne de caractères
+    '''
     r = sr.Recognizer()
     with sr.Microphone() as source:
         print("Écoute en cours... ")
@@ -54,6 +66,11 @@ def takeCommand():
             
 
 def voice_cmd():
+    '''
+    Fonction permettant de répondre aux instructions de l'utilisateur.
+    Retour :
+        - None
+    '''
     running = True 
     mode_bouton = False
     while running:
@@ -110,7 +127,7 @@ def voice_cmd():
                     speak("Au revoir")
                     
                 
-
+##### PROGRAMME PRINCIPAL ######
 if __name__ == '__main__':
     wishMe()
     voice_cmd()    
