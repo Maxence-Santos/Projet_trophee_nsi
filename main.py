@@ -21,8 +21,11 @@ def trouverInstance() -> None:
     Ajoute tous les processus ouverts dans une liste afin de chercher si code.exe est ouvert ou non.
     On l'ouvre s'il n'est pas déjà ouvert
     '''
+    #On crée une instance de WMI()
     f = wmi.WMI()
+    #On crée une liste contenant tous les processus lancés
     pr = [process.name for process in f.Win32_Process()]
+    #Afin de ne pas lancer Code à chaque fois, on ne l'ouvre que s'il n'est pas déjà ouvert
     if "Code.exe" not in pr:
         os.startfile("C:\\Program Files\\Microsoft VS Code\\Code.exe")
 
